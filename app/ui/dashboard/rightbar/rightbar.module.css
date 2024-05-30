@@ -1,0 +1,17 @@
+.container{
+position: fixed;
+}
+.item{
+    position: relative;
+}
+.bgContainer{
+position: absolute;
+bottom: 0;
+right: 0;
+width: 30%;
+height: 70%;
+}
+.bg{
+    object-fit: cover;
+    opacity: 0.3;
+}
