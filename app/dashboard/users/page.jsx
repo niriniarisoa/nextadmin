@@ -11,7 +11,7 @@ const UsersPage = async({searchParams}) => {
   const q = searchParams?.q ||"";
   const page = searchParams?.page || 1;
   const {count,users} = await fecthUsers(q,page);
-console.log(users)
+//  console.log(users)
   return (
     <div className={styles.container}>
       <div className={styles.top}>

@@ -1,6 +1,6 @@
 import { Material, User } from "./models";
 import { connectToDB } from "./utils";
-
+//afficher tout les utilisateur
 export const fecthUsers = async (q, page) => {
   const regex = new RegExp(q, "i");
 
@@ -17,7 +17,7 @@ export const fecthUsers = async (q, page) => {
     throw new Error("failed to fetch users!");
   }
 };
-
+//fetch signle user
 export const fecthUser = async (id) => {
   try {
     connectToDB();
@@ -25,11 +25,11 @@ export const fecthUser = async (id) => {
     return user;
   } catch (err) {
     console.log(err);
-    throw new Error("failed to fetch users!");
+    throw new Error("failed to fetch user!");
   }
 };
 
-
+//fecth materials
 export const fetchMaterials = async (q, page) => {
   const regex = new RegExp(q, "i");
 
@@ -46,12 +46,12 @@ export const fetchMaterials = async (q, page) => {
     throw new Error("failed to fetch materials!");
   }
 };
-
+//fetch sinle material
 export const fetchMaterial = async (id) => {
   try {
     connectToDB();
-    const Material = await User.findById(id);
-    return Material;
+    const material = await Material.findById(id);
+    return material;
   } catch (err) {
     console.log(err);
     throw new Error("failed to fetch Material!");

@@ -62,7 +62,7 @@ export const updateUser = async (formData) => {
     connectToDB();
 
     const updateFields = {
-      username,
+    username,
     email,
     password,
     phone,
@@ -77,7 +77,7 @@ export const updateUser = async (formData) => {
         (updateFields[key] === "" || undefined) && delete updateFields[key]
     );
  
-    await User.findByIdAndDelete  
+    await User.findByIdAndUpdate(id , updateFields); 
   } catch (err) {
     console.log(err);
     throw new Error("Echec de la modification!");
@@ -118,6 +118,44 @@ export const addmaterial = async (formData) => {
   redirect("/dashboard/materiel");
 };
 
+//update materiel
+export const updateMateriel = async (formData) => {
+  const {
+    id,
+    title,
+    cat,
+    depart,
+    stat,
+    location,
+  } = Object.fromEntries(formData);
+
+  try {
+    connectToDB();
+
+    const updateFields = {
+      title,
+      cat,
+      depart,
+      stat,
+      location,
+    };
+
+    Object.keys(updateFields).forEach(
+      (key) =>
+        (updateFields[key] === "" || undefined) && delete updateFields[key]
+    );
+ 
+    await Material.findByIdAndUpdate(id , updateFields); 
+  } catch (err) {
+    console.log(err);
+    throw new Error("Echec de la modification!");
+  }
+
+  revalidatePath("/dashboard/materiel");
+  redirect("/dashboard/materiel");
+};
+
+//Delete materiel
 export const deletematerial = async (formData) => {
   const {
    id

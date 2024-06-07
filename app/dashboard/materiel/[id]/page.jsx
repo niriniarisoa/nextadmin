@@ -1,31 +1,34 @@
-import { fecthUser } from "@/app/libs/data";
+import { updateMateriel } from "@/app/libs/actions";
+import { fetchMaterial} from "@/app/libs/data";
 import styles from "@/app/ui/dashboard/materials/singleMaterial/singleMaterial.module.css";
 import Image from "next/image";
 
 const SingleMaterialPage = async ({params}) => {
 const {id} = params;
-  const user = fecthUser(id);
+  const material = await fetchMaterial(id);
+  
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
         <div className={styles.imageContainer}>
-          <Image src="/noproduct.jpg" alt="" fill />
+          <Image src={material.image || "/noproduct.jpg"} alt="" fill />
         </div>
-        {user.username}
+        {material.title}
       </div>
       <div className={styles.formContainer}>
-        <form action="" className={styles.form}>
+        <form action={updateMateriel} className={styles.form}>
+        <input type="hidden" name="id" value={material.id} />
           <label>Title</label>
-          <input type="text" name="title" placeholder="projecteur" />
-          <label>Prix</label>
-          <input type="number" name="prix" />
-          <label>stock</label>
-          <input type="stock" name="Stock" placeholder="" />
-          <label>nombre</label>
-          <input type="nombre" name="nombre" placeholder="01" />
+          <input type="text" name="title" placeholder={material.title}/>
+          <label>Departement</label>
+          <input type="number" name="depart" placeholder={material.depart}/>
+          <label>Etat</label>
+          <input type="stock" name="stat" placeholder={material.stat} />
+          <label>Localisation</label>
+          <input type="nombre" name="location" placeholder={material.location} />
           <label>Categorie</label>
           <select name="cat" id="cat">
-            <option value="meuble">Catégorie</option>
+            <option value={material.cat}>Catégorie</option>
             <option value="meuble">meuble</option>
             <option value="appareil">appareil</option>
             <option value="branchement">Branchement</option>
@@ -42,6 +45,7 @@ const {id} = params;
         </form>
       </div>
     </div>
+    
   );
 };
 export default SingleMaterialPage;
