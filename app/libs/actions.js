@@ -6,7 +6,6 @@ import { revalidatePath } from "next/cache";
 import bcrypt from "bcrypt";
 import { signIn } from "next-auth/react";
 
-
 export const addUser = async (formData) => {
   const {
     username,
