@@ -4,6 +4,7 @@ import { Material, User } from "./models";
 import { connectToDB } from "./utils";
 import { revalidatePath } from "next/cache";
 import bcrypt from "bcrypt";
+import { signIn } from "next-auth/react";
 
 
 export const addUser = async (formData) => {
@@ -185,4 +186,22 @@ export const deleteUser = async (formData) => {
   }
 
   revalidatePath("/dashboard/"); 
+};
+
+export const authentificate = async (formData) => {
+  const { username, password } = Object.fromEntries(formData);
+  try {
+    const result = await signIn("credentials", {
+      redirect: false,
+      username,
+      password,
+    });
+    if (!result || result.error) {
+      throw new Error(result.error || "Sign in failed");
+    }
+    return result;
+  } catch (err) {
+    console.log("Authentication error:", err.message);
+    throw err;
+  }
 };
