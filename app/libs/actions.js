@@ -1,6 +1,6 @@
 "use server";
 import { redirect } from "next/navigation";
-import { Material, User } from "./models";
+import { Material, Transaction, User } from "./models";
 import { connectToDB } from "./utils";
 import { revalidatePath } from "next/cache";
 import bcrypt from "bcrypt";
@@ -185,4 +185,31 @@ export const deleteUser = async (formData) => {
   }
 
   revalidatePath("/dashboard/"); 
+};
+//ajout transaction
+export const addTransaction = async (formData) => {
+  const {
+    materialId,
+    userId,
+    type,
+    quantity,
+  } = Object.fromEntries(formData);
+
+  try {
+    await connectToDB();
+    const newTransaction = new Transaction({
+      materialId,
+      userId,
+      type,
+      quantity,
+    });
+
+    await newTransaction.save();
+  } catch (err) {
+    console.log(err);
+    throw new Error("Echec de la creation de la transaction!");
+  }
+
+  revalidatePath("/dashboard/transaction");
+  redirect("/dashboard/transaction");
 };

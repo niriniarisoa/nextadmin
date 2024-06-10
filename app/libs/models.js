@@ -56,9 +56,16 @@ const userSchema = new mongoose.Schema({
     },
     departement:{
         type: String,
-    }
-},
-{
+    },
+    notifications: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Notification"
+    }],
+    transactions: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Transaction"
+    }]
+}, {
     timestamps: true
 });
 
@@ -79,12 +86,96 @@ const materialSchema = new mongoose.Schema({
     },
      location:{
         type:String,
+    },
+    transactions: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Transaction"
+    }],
+    maintenance: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Maintenance"
     }
-    
-},
-{
+}, {
+    timestamps: true
+});
+
+const transactionSchema = new mongoose.Schema({
+    materialId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Material",
+      required: true,
+    },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    type: { // 'in' pour entrée, 'out' pour sortie
+      type: String,
+      required: true,
+      enum: ['in', 'out']
+    },
+    quantity: {
+      type: Number,
+      required: true,
+    },
+    date: {
+      type: Date,
+      default: Date.now,
+    },
+  }, {
+    timestamps: true
+  });
+  
+
+const notificationSchema = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+    },
+    message: {
+        type: String,
+        required: true,
+    },
+    seen: {
+        type: Boolean,
+        default: false,
+    },
+    date: {
+        type: Date,
+        default: Date.now,
+    },
+}, {
+    timestamps: true
+});
+
+const maintenanceSchema = new mongoose.Schema({
+    materialId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Material",
+        required: true,
+    },
+    status: { // 'new', 'used', 'damaged', 'in_repair'
+        type: String,
+        required: true,
+        enum: ['new', 'used', 'damaged', 'in_repair']
+    },
+    lastMaintenanceDate: {
+        type: Date,
+    },
+    nextMaintenanceDate: {
+        type: Date,
+    },
+    maintenanceReport: {
+        type: String,
+    },
+}, {
     timestamps: true
 });
 
 export const User = mongoose.models.User || mongoose.model("User", userSchema);
 export const Material = mongoose.models.Material || mongoose.model("Material", materialSchema);
+export const Transaction = mongoose.models.Transaction || mongoose.model("Transaction", transactionSchema);
+export const Notification = mongoose.models.Notification || mongoose.model("Notification", notificationSchema);
+export const Maintenance = mongoose.models.Maintenance || mongoose.model("Maintenance", maintenanceSchema);
