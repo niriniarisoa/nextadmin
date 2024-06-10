@@ -24,17 +24,17 @@ const menuItems = [
           icon: <MdDashboard />,
         },
         {
-          title: "Users",
+          title: "Utilisateurs",
           path: "/dashboard/users",
           icon: <MdSupervisedUserCircle />,
         },
         {
-          title: "Materials",
+          title: "Materiels",
           path: "/dashboard/materiel",
           icon: <MdShoppingBag />,
         },
         {
-          title: "Actions",
+          title: "Transactions",
           path: "/dashboard/transactions",
           icon: <MdWork/>,
         },
@@ -44,13 +44,13 @@ const menuItems = [
       title: "Analytics",
       list: [
         {
-          title: "Revenue",
-          path: "/dashboard/revenue",
+          title: "Etat ",
+          path: "/dashboard/etat",
           icon: <MdWork />,
         },
         {
-          title: "Reports",
-          path: "/dashboard/reports",
+          title: "Rapports",
+          path: "/dashboard/raports",
           icon: <MdAnalytics />,
         },
         {
@@ -61,15 +61,15 @@ const menuItems = [
       ],
     },
     {
-      title: "User",
+      title: "Parametre",
       list: [
         {
-          title: "Settings",
+          title: "Parametre",
           path: "/dashboard/settings",
           icon: <MdOutlineSettings />,
         },
         {
-          title: "Help",
+          title: "Aide",
           path: "/dashboard/help",
           icon: <MdHelpCenter />,
         },
@@ -80,10 +80,10 @@ const Sidebar = () =>{
     return(
         <div className={styles.container}>
           <div className={styles.user}>
-            <Image className={styles.userImage} src="/noavatar.png" alt="" width="50" height="50"/>
+            <Image className={styles.userImage} src="/logo.png" alt="" width="50" height="50"/>
             <div className={styles.userDetail}> 
-              <span className={styles.username}>Mumu MU</span>
-              <span className={styles.userTitle}>Administrator</span>
+              <span className={styles.username}>Gestion Logistique de Materiel</span>
+              <span className={styles.userTitle}>NG Academy</span>
             </div>
           </div>
             <ul className={styles.list}>
