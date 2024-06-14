@@ -213,3 +213,51 @@ export const addTransaction = async (formData) => {
   revalidatePath("/dashboard/transaction");
   redirect("/dashboard/transaction");
 };
+
+export const updateTransaction = async (formData) => {
+  const {
+    id,
+    materialId,
+    userId,
+    type,
+    quantity,
+  } = Object.fromEntries(formData);
+
+  try {
+    await connectToDB();
+
+    const updateFields = {
+      materialId,
+      userId,
+      type,
+      quantity,
+    };
+
+    Object.keys(updateFields).forEach(
+      (key) => (updateFields[key] === "" || undefined) && delete updateFields[key]
+    );
+
+    await Transaction.findByIdAndUpdate(id, updateFields);
+  } catch (err) {
+    console.log(err);
+    throw new Error("Echec de la modification de la transaction!");
+  }
+
+  revalidatePath("/dashboard/transaction");
+  redirect("/dashboard/transaction");
+};
+
+export const deleteTransaction = async (formData) => {
+  const { id } = Object.fromEntries(formData);
+
+  try {
+    await connectToDB();
+    await Transaction.findByIdAndDelete(id);
+  } catch (err) {
+    console.log(err);
+    throw new Error("Echec de la suppression de la transaction!");
+  }
+
+  revalidatePath("/dashboard/transaction");
+  redirect("/dashboard/transaction");
+};

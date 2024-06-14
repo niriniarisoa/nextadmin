@@ -60,19 +60,32 @@ export const fetchMaterial = async (id) => {
 
 //fetch Transaction
 export const fetchTransactions = async (q, page) => {
-  const regex = new RegExp(q, "i");
-
   const ITEM_PER_PAGE = 5;
+  const filter = {};
+
+  if (q && mongoose.Types.ObjectId.isValid(q)) {
+    filter.materialId = q;
+  }
+
   try {
-    connectToDB();
-    const count = await Transaction.find({ title: { $regex: regex } }).count();
-    const transactions = await Transaction.find({ title: { $regex: regex } })
+    await connectToDB();
+    console.log("Connected to DB");
+
+    const count = await Transaction.find(filter).countDocuments();
+    console.log("Count of transactions:", count);
+
+    const transactions = await Transaction.find(filter)
       .limit(ITEM_PER_PAGE)
-      .skip(ITEM_PER_PAGE * (page - 1));
+      .skip(ITEM_PER_PAGE * (page - 1))
+      .populate('materialId')  // Assuming materialId and userId are references
+      .populate('userId');
+
+    console.log("Fetched transactions:", transactions);
+
     return { count, transactions };
   } catch (err) {
-    console.log(err);
-    throw new Error("failed to fetch materials!");
+    console.error("Error fetching transactions:", err);
+    throw new Error("failed to fetch transactions!");
   }
 };
 

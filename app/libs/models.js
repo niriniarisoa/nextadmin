@@ -100,32 +100,15 @@ const materialSchema = new mongoose.Schema({
 });
 
 const transactionSchema = new mongoose.Schema({
-    materialId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Material",
-      required: true,
-    },
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
-    type: { // 'in' pour entrée, 'out' pour sortie
-      type: String,
-      required: true,
-      enum: ['in', 'out']
-    },
-    quantity: {
-      type: Number,
-      required: true,
-    },
-    date: {
-      type: Date,
-      default: Date.now,
-    },
-  }, {
+    materialId: { type: mongoose.Schema.Types.ObjectId, ref: 'Material', required: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    type: { type: String, enum: ['in', 'out'], required: true },
+    quantity: { type: Number, required: true },
+    date: { type: Date, default: Date.now }
+  },
+  {
     timestamps: true
-  });
+});
   
 
 const notificationSchema = new mongoose.Schema({

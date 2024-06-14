@@ -97,9 +97,6 @@ const Sidebar = () =>{
                 </li>
             ))}
             </ul>
-             <button className={styles.Logout}>
-              <MdLogout/>
-              Logout</button>
         </div>
     );
 };
