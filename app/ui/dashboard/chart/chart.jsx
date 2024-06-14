@@ -1,44 +1,37 @@
-"use client"
+"use client";
+import { useEffect, useState } from 'react';
 import styles from "@/app/ui/dashboard/chart/chart.module.css";
-import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts'; 
+import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const data = [
-    {
-        name:"Lundi",
-        sortie:0,
-        retour:2,
-    },
-    {
-        name:"Mardi",
-        sortie:10,
-        retour:10,
-    },
-    {
-        name:"Mercredi",
-        sortie:2,
-        retour:0,
-    },
-    {
-        name:"Jeudi",
-        sortie:0,
-        retour:2,
-    },
-    {
-        name:"vendredi",
-        sortie:1,
-        retour:1,
-    },
-    {
-        name:"Samedi",
-        sortie:5,
-        retour:2,
-    },
-]
+const fetchWeeklyTransactionSummary = async () => {
+  const res = await fetch('/api/transactions/weekly-summary');
+  if (!res.ok) {
+    throw new Error('Failed to fetch');
+  }
+  const data = await res.json();
+  return data;
+};
 
 const Chart = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const summary = await fetchWeeklyTransactionSummary();
+      const formattedData = Object.keys(summary).map(day => ({
+        name: day,
+        sortie: summary[day].sortie,
+        retour: summary[day].retour,
+      }));
+      setData(formattedData);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>weekly recap </h2>
+      <h2 className={styles.title}>Weekly Recap</h2>
       <ResponsiveContainer width="100%" height="90%">
         <LineChart
           width={500}

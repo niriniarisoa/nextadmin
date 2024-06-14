@@ -99,3 +99,35 @@ export const fetchMaterialsAndUsers = async () => {
 
   return { materials, users };
 };
+
+// ... other imports and functions
+export const fetchWeeklyTransactionSummary = async () => {
+  await connectToDB();
+
+  const startOfWeek = new Date();
+  startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
+  startOfWeek.setHours(0, 0, 0, 0);
+
+  const endOfWeek = new Date(startOfWeek);
+  endOfWeek.setDate(endOfWeek.getDate() + 6);
+  endOfWeek.setHours(23, 59, 59, 999);
+
+  const transactions = await Transaction.find({
+    date: { $gte: startOfWeek, $lte: endOfWeek }
+  });
+
+  const summary = transactions.reduce((acc, transaction) => {
+    const day = new Date(transaction.date).toLocaleDateString("fr-FR", { weekday: "long" });
+    if (!acc[day]) {
+      acc[day] = { sortie: 0, retour: 0 };
+    }
+    if (transaction.type === "out") {
+      acc[day].sortie += transaction.quantity;
+    } else if (transaction.type === "in") {
+      acc[day].retour += transaction.quantity;
+    }
+    return acc;
+  }, {});
+
+  return summary;
+};

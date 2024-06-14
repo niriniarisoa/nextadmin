@@ -9,12 +9,12 @@ const TransactionsPage = async ({ searchParams }) => {
     const q = searchParams?.q || "";
     const page = parseInt(searchParams?.page, 10) || 1;
   
-    console.log("Fetching transactions with query:", q, "and page:", page);
+    // console.log("Fetching transactions with query:", q, "and page:", page);
   
     const { count, transactions } = await fetchTransactions(q, page);
   
-    console.log("Transactions:", transactions);
-    console.log("Total count:", count);
+    // console.log("Transactions:", transactions);
+    // console.log("Total count:", count);
   
     return (
       <div className={styles.container}>
