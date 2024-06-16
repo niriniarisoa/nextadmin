@@ -8,7 +8,6 @@ const TransactionsCard = ({ totalCount }) => {
       <div className={styles.texts}>
         <span className={styles.title}>Total Transactions</span>
         <span className={styles.number}>{totalCount}</span>
-        <span><span className={styles.positive}>12%</span> than previous week</span>
       </div>
     </div>
   );

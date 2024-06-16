@@ -147,7 +147,7 @@ export const fetchTotalUsersCount = async () => {
 export const fetchTotaltransactionsCount = async () => {
   try {
     await connectToDB();
-    const count = await User.countDocuments();
+    const count = await Transaction.countDocuments();
     return count;
   } catch (err) {
     console.log(err);
