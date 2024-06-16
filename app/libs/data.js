@@ -120,3 +120,37 @@ export const fetchAllTransactionSummary = async () => {
 
   return summary;
 };
+
+//manisa materiel
+export const fetchTotalMaterialsCount = async () => {
+  try {
+    await connectToDB();
+    const count = await Material.countDocuments();
+    return count;
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to fetch total materials count!");
+  }
+};
+//manisa user
+export const fetchTotalUsersCount = async () => {
+  try {
+    await connectToDB();
+    const count = await User.countDocuments();
+    return count;
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to fetch total materials count!");
+  }
+};
+//manisa transaction
+export const fetchTotaltransactionsCount = async () => {
+  try {
+    await connectToDB();
+    const count = await User.countDocuments();
+    return count;
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to fetch total materials count!");
+  }
+};
