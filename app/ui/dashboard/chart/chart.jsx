@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import styles from "@/app/ui/dashboard/chart/chart.module.css";
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const fetchWeeklyTransactionSummary = async () => {
+const fetchAllTransactionSummary = async () => {
   const res = await fetch('/api/transactions/weekly-summary');
   if (!res.ok) {
     throw new Error('Failed to fetch');
@@ -17,7 +17,7 @@ const Chart = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const summary = await fetchWeeklyTransactionSummary();
+      const summary = await fetchAllTransactionSummary();
       const formattedData = Object.keys(summary).map(day => ({
         name: day,
         sortie: summary[day].sortie,
@@ -31,7 +31,7 @@ const Chart = () => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Weekly Recap</h2>
+      <h2 className={styles.title}>Transaction Summary</h2>
       <ResponsiveContainer width="100%" height="90%">
         <LineChart
           width={500}

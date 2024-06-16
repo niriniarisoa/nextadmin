@@ -73,7 +73,6 @@ export const fetchTransactions = async (q, page) => {
 
     const count = await Transaction.find(filter).countDocuments();
     console.log("Count of transactions:", count);
-
     const transactions = await Transaction.find(filter)
       .limit(ITEM_PER_PAGE)
       .skip(ITEM_PER_PAGE * (page - 1))
@@ -101,20 +100,10 @@ export const fetchMaterialsAndUsers = async () => {
 };
 
 // ... other imports and functions
-export const fetchWeeklyTransactionSummary = async () => {
+export const fetchAllTransactionSummary = async () => {
   await connectToDB();
 
-  const startOfWeek = new Date();
-  startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
-  startOfWeek.setHours(0, 0, 0, 0);
-
-  const endOfWeek = new Date(startOfWeek);
-  endOfWeek.setDate(endOfWeek.getDate() + 6);
-  endOfWeek.setHours(23, 59, 59, 999);
-
-  const transactions = await Transaction.find({
-    date: { $gte: startOfWeek, $lte: endOfWeek }
-  });
+  const transactions = await Transaction.find({});
 
   const summary = transactions.reduce((acc, transaction) => {
     const day = new Date(transaction.date).toLocaleDateString("fr-FR", { weekday: "long" });
