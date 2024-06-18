@@ -9,12 +9,8 @@ const TransactionsPage = async ({ searchParams }) => {
     const q = searchParams?.q || "";
     const page = parseInt(searchParams?.page, 10) || 1;
   
-    // console.log("Fetching transactions with query:", q, "and page:", page);
   
     const { count, transactions } = await fetchTransactions(q, page);
-  
-    // console.log("Transactions:", transactions);
-    // console.log("Total count:", count);
   
     return (
       <div className={styles.container}>
@@ -45,7 +41,7 @@ const TransactionsPage = async ({ searchParams }) => {
                 <td>{new Date(transaction.date).toLocaleDateString()}</td>
                 <td>
                   <div className={styles.buttons}>
-                    <Link href={`/dashboard/transactions/${transaction._id}`}>
+                    <Link href={`/dashboard/transaction/${transaction._id}`}>
                       <button className={`${styles.button} ${styles.view}`}>View</button>
                     </Link>
                     <form action={deleteTransaction}>

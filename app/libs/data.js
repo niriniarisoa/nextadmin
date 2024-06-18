@@ -87,6 +87,26 @@ export const fetchTransactions = async (q, page) => {
     throw new Error("failed to fetch transactions!");
   }
 };
+//single transaction
+export const fetchTransaction = async (id) => {
+  await connectToDB();
+  const transaction = await Transaction.findById(id)
+    .populate("materialId")
+    .populate("userId")
+    .exec();
+  
+  if (transaction) {
+    transaction._id = transaction._id.toString();
+    if (transaction.materialId) {
+      transaction.materialId._id = transaction.materialId._id.toString();
+    }
+    if (transaction.userId) {
+      transaction.userId._id = transaction.userId._id.toString();
+    }
+  }
+  
+  return transaction;
+};
 
 export const fetchMaterialsAndUsers = async () => {
   await connectToDB();

@@ -34,13 +34,6 @@ const {id} = params;
             <option value="branchement">Branchement</option>
             <option value="installation">installation</option>
           </select>
-          <label>Description</label>
-          <textarea
-            name="descri"
-            id="descri"
-            rows="16"
-            placeholder="Description"
-          ></textarea>
           <button>Update</button>
         </form>
       </div>

@@ -2,10 +2,6 @@ import { addmaterial } from "@/app/libs/actions";
 import styles from "@/app/ui/dashboard/materials/addProduct/addProduct.module.css";
 
 const AddMaterial = async() => {
-
-  // const q = searchParams?.q ||"";
-  // const page = searchParams?.page || 1;
-  // const {count,users} = await fecthUsers(q,page);
   return (
     <div className={styles.container}>
       <form action={addmaterial} className={styles.form}>
@@ -25,12 +21,6 @@ const AddMaterial = async() => {
         </select>
         <input type="text" name="stat" placeholder="Etat" />
         <input type="text" name="location" placeholder="lieu" />
-        <textarea
-          name="descri"
-          id="descri"
-          rows="16"
-          placeholder="Description"
-        ></textarea>
         <button type="submit">Submit</button>
       </form>
     </div>

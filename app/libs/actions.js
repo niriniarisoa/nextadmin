@@ -44,7 +44,7 @@ export const addUser = async (formData) => {
   revalidatePath("/dashboard/users");
   redirect("/dashboard/users");
 };
-
+//update user
 export const updateUser = async (formData) => {
   const {
     id,
@@ -86,7 +86,7 @@ export const updateUser = async (formData) => {
   revalidatePath("/dashboard/users");
   redirect("/dashboard/users");
 };
-
+//ajout materiel
 export const addmaterial = async (formData) => {
   const {
     title,
@@ -213,7 +213,7 @@ export const addTransaction = async (formData) => {
   revalidatePath("/dashboard/transaction");
   redirect("/dashboard/transaction");
 };
-
+//update transaction
 export const updateTransaction = async (formData) => {
   const {
     id,
@@ -246,7 +246,7 @@ export const updateTransaction = async (formData) => {
   revalidatePath("/dashboard/transaction");
   redirect("/dashboard/transaction");
 };
-
+//delete transaction
 export const deleteTransaction = async (formData) => {
   const { id } = Object.fromEntries(formData);
 
