@@ -27,25 +27,11 @@ const userSchema = new mongoose.Schema({
         minlength:3,
         // maxlength:30,
     },
-    password:{
-        type: String,
-        required: true,
-        minlength:3,
-      
-    },
     phone:{
         type: String, 
         required: true,
         minlength:10,
         maxlength:10,
-    },
-    image:{
-        type:String,
-        required:false,
-    },
-    titre:{
-        type:Boolean,
-        default:false,
     },
     status:{
         type:Boolean,

@@ -11,7 +11,7 @@ const UsersPage = async({searchParams}) => {
   const q = searchParams?.q ||"";
   const page = searchParams?.page || 1;
   const {count,users} = await fecthUsers(q,page);
-//  console.log(users)
+
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -36,12 +36,6 @@ const UsersPage = async({searchParams}) => {
             <tr key={user.id}>
             <td>
               <div className={styles.user}>
-                <Image
-                  src= "/noavatar.png"
-                  width={40}
-                  height={40}
-                  className={styles.userImage}
-                />
                 {user.username}
               </div>
             </td>

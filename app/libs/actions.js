@@ -3,14 +3,13 @@ import { redirect } from "next/navigation";
 import { Material, Transaction, User } from "./models";
 import { connectToDB } from "./utils";
 import { revalidatePath } from "next/cache";
-import bcrypt from "bcrypt";
+
 
 
 export const addUser = async (formData) => {
   const {
     username,
     email,
-    password,
     phone,
     titre,
     status,
@@ -20,14 +19,9 @@ export const addUser = async (formData) => {
 
   try {
     connectToDB();
-
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-    const truncatedHash = hashedPassword.substring(0, 20); //hachage à 20 caractères
     const newUser = new User({
       username,
       email,
-      password: truncatedHash,
       phone,
       titre,
       status,
@@ -50,7 +44,6 @@ export const updateUser = async (formData) => {
     id,
     username,
     email,
-    password,
     phone,
     titre,
     status,
@@ -64,7 +57,6 @@ export const updateUser = async (formData) => {
     const updateFields = {
     username,
     email,
-    password,
     phone,
     titre,
     status,

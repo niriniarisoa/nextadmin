@@ -7,7 +7,6 @@ const AddUser = () => {
       <form action={addUser} className={styles.form}>
         <input type="text" placeholder="Username" name="username" required />
         <input type="email" placeholder="email" name="email" required />
-        <input type="password" placeholder="password" name="password" required />
         <input type="phone" placeholder="phone" name="phone" required />
         <select name="titre" id="titre">
           <option value={false} >Admin?</option>
