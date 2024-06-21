@@ -6,6 +6,7 @@ import {
   MdWork,
   MdOutlineSettings,
   MdHelpCenter,
+  MdFileCopy,
 } from 'react-icons/md';
 import MenuLink from './menuLink/menuLink.jsx';
 import Image from 'next/image';
@@ -33,6 +34,11 @@ const menuItems = [
         title: "Transactions",
         path: "/dashboard/transaction",
         icon: <MdWork />,
+      },
+      {
+        title: "Paperasse",
+        path: "/dashboard/paperasse",
+        icon: <MdFileCopy />,
       },
     ],
   },

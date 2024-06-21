@@ -1,0 +1,62 @@
+@media print {
+  .print-hidden * {
+    visibility: hidden;
+  }
+
+  .print-visible, .print-visible * {
+    visibility: visible;
+  }
+
+  .print-visible {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  .no-print {
+    display: none;
+  }
+}
+
+.container {
+  background-color: white;
+  color: black;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.paragraph {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.details {
+  margin-bottom: 20px;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.value {
+  margin-left: 10px;
+}

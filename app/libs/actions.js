@@ -253,3 +253,15 @@ export const deleteTransaction = async (formData) => {
   revalidatePath("/dashboard/transaction");
   redirect("/dashboard/transaction");
 };
+
+export async function getTransactionById(id) {
+  // Fetch the transaction from your database
+  return {
+    _id: id,
+    materialId: { title: 'Example Material' },
+    userId: { username: 'exampleUser' },
+    type: 'out',
+    quantity: 100,
+    date: new Date().toISOString(),
+  };
+}
