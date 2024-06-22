@@ -19,7 +19,6 @@ const BonSortiePage = async ({ params }) => {
       <p className={styles.paragraph}>Material: {transaction.materialId.title}</p>
       <p className={styles.paragraph}>User: {transaction.userId.username}</p>
       <p className={styles.paragraph}>Type: {transaction.type === "in" ? "Entrée" : "Sortie"}</p>
-      <p className={styles.paragraph}>Quantity: {transaction.quantity}</p>
       <p className={styles.paragraph}>Date: {new Date(transaction.date).toLocaleDateString()}</p>
       <PrintButton />
     </div>
